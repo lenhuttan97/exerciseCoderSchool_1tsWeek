@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+<div  style="width: 500px;" id="massageDiv" > 
+	<span id="massage"> Number Guessing Game.</span> 
+	<span id="countDown"> You have 10 guesses left.</span>
+</div>
+<input id="number" type="number"/>
+<button id="guessButton"> button</button>
+<ul id="myList"></ul>
+
+<script>
+let button = document.getElementById('guessButton');
+let massage =document.getElementById('massage');
+let massageDiv =document.getElementById('massageDiv');
+let countDown =document.getElementById('countDown');
+var pastCount = 1;
+let countDownNum = 9;
+let  numberRandom=Math.round(Math.random() * 10);
+button.addEventListener('click', function() {
+	let massageResult;
+	let numberIn=document.getElementById('number').value;
+	let newItem = document.createElement("LI");
+	let pastGuess = "The " + pastCount + " recent guess: "  + numberIn;
+    let textnode = document.createTextNode(pastGuess);
+  	newItem.appendChild(textnode);
+	newItem.appendChild(textnode);
+if (numberIn > numberRandom){
+	massageResult="sorry your guess too hight";
+	massageDiv.style.backgroundColor = "red";
+} else if (numberIn < numberRandom){
+	massageResult="sorry your guess too low";
+	massageDiv.style.backgroundColor = "red";
+} else {
+	massageResult="Congratulations!! You guessed correctly.";
+	massageDiv.style.backgroundColor = "green";
+	button.disabled = true;
+}
+let list = document.getElementById("myList");
+massage.innerHTML=massageResult;
+  list.insertBefore(newItem, list.childNodes[0]);
+  countDown.innerHTML=" You have " + countDownNum +" guesses left.";
+pastCount++;
+countDownNum--;
+if(countDownNum < 0){
+	massageDiv.innerHTML="You were false."
+	massageDiv.style.backgroundColor = "red";
+	button.disabled = true;
+}
+});
+</script>
+</body>
+</html>
